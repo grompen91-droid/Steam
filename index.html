@@ -152,6 +152,194 @@
       transform: scale(1.035);
     }
 
+    /* "Browse all" tile */
+    .cover.more {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+    .cover.more:hover,
+    .cover.more:focus-visible {
+      color: var(--fg);
+      border-color: rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.03);
+      outline: none;
+    }
+    .more-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* Library dialog */
+    dialog.lib {
+      width: min(720px, 94vw);
+      max-height: 86svh;
+      margin: auto;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #111113;
+      color: var(--fg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    dialog.lib:not([open]) { display: none; }
+    dialog.lib::backdrop {
+      background: rgba(0, 0, 0, 0.72);
+    }
+
+    .lib-head {
+      flex: none;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.85rem 0.95rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .lib-title { display: flex; flex-direction: column; line-height: 1.2; }
+    .lib-h { font-size: 0.95rem; font-weight: 600; }
+    .lib-sub {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .lib-search {
+      flex: 1;
+      min-width: 0;
+      background: var(--tile);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.55rem 0.7rem;
+      color: var(--fg);
+      font: inherit;
+      font-size: 0.9rem;
+    }
+    .lib-search::placeholder { color: var(--muted); }
+    .lib-search:focus {
+      outline: none;
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+    .lib-close {
+      flex: none;
+      width: 2rem;
+      height: 2rem;
+      display: grid;
+      place-items: center;
+      background: none;
+      border: none;
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: color 0.15s ease, background 0.15s ease;
+    }
+    .lib-close:hover { color: var(--fg); background: rgba(255, 255, 255, 0.06); }
+
+    .lib-list {
+      flex: 1;
+      overflow-y: auto;
+      margin: 0;
+      padding: 0.35rem;
+      list-style: none;
+      display: block;
+    }
+    .lib-item { border-radius: 8px; }
+    .lib-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.45rem 0.55rem;
+      background: none;
+      border: none;
+      border-radius: 8px;
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.12s ease;
+    }
+    .lib-row:hover,
+    .lib-row:focus-visible {
+      background: rgba(255, 255, 255, 0.045);
+      outline: none;
+    }
+    .lib-row .thumb {
+      flex: none;
+      width: 84px;
+      aspect-ratio: 231 / 87;
+      object-fit: cover;
+      border-radius: 4px;
+      background: var(--tile);
+    }
+    .lib-row .rn {
+      flex: 1;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 0.94rem;
+    }
+    .lib-row .rh {
+      flex: none;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .lib-row[aria-expanded="true"] { background: rgba(255, 255, 255, 0.045); }
+    .lib-row[aria-expanded="true"] .rh { color: var(--dim); }
+
+    .lib-info[hidden] { display: none; }
+    .lib-info {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.45rem 1.4rem;
+      padding: 0.35rem 0.6rem 0.85rem calc(84px + 1.3rem);
+      font-size: 0.86rem;
+      color: var(--dim);
+    }
+    .lib-info .k {
+      font-family: var(--mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-right: 0.45rem;
+    }
+    .lib-link {
+      color: var(--fg);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1px;
+    }
+    .lib-link:hover { border-color: rgba(255, 255, 255, 0.4); }
+
+    .lib-empty {
+      margin: 0;
+      padding: 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 520px) {
+      dialog.lib { width: 100vw; max-width: 100vw; max-height: 92svh; border-radius: 12px 12px 0 0; margin: auto auto 0; }
+      .lib-info { padding-left: calc(84px + 1.3rem); }
+    }
+
     /* Interests */
     .grid3 {
       display: grid;
@@ -264,6 +452,20 @@
             <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/440/library_600x900.jpg" alt="Team Fortress 2 cover art" width="600" height="900" loading="lazy" />
           </a>
         </figure>
+        <div class="game">
+          <figcaption><span class="t">All games</span><span class="h" data-count>library</span></figcaption>
+          <button type="button" class="cover more" id="openLib" aria-haspopup="dialog" aria-label="Browse all games">
+            <span class="more-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                <rect x="3" y="3" width="7" height="7" rx="1.4"></rect>
+                <rect x="14" y="3" width="7" height="7" rx="1.4"></rect>
+                <rect x="3" y="14" width="7" height="7" rx="1.4"></rect>
+                <path d="M17.5 14.5v6M14.5 17.5h6"></path>
+              </svg>
+            </span>
+            <span class="more-label">Browse all</span>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -294,7 +496,125 @@
       </section>
     </div>
 
-    <footer>© 2026 gvsh · 449 games in the library</footer>
+    <footer>© 2026 gvsh · <span data-footcount>445</span> games · <span data-foothours>8,260</span> hours</footer>
+
+    <dialog id="lib" class="lib" aria-label="Game library">
+      <div class="lib-head">
+        <div class="lib-title">
+          <span class="lib-h">Library</span>
+          <span class="lib-sub" data-count>A–Z</span>
+        </div>
+        <input id="libSearch" class="lib-search" type="search" placeholder="Search games…" autocomplete="off" spellcheck="false" aria-label="Search games" />
+        <button type="button" id="libClose" class="lib-close" aria-label="Close">✕</button>
+      </div>
+      <ul id="libList" class="lib-list"></ul>
+      <p id="libEmpty" class="lib-empty" hidden>No games match that search.</p>
+    </dialog>
   </main>
+
+  <script src="games.js"></script>
+  <script>
+    (function () {
+      var games = window.GAMES || [];
+      var meta = window.GAMES_META || { count: games.length, totalHours: 0 };
+      var dlg = document.getElementById('lib');
+      var listEl = document.getElementById('libList');
+      var emptyEl = document.getElementById('libEmpty');
+      var searchEl = document.getElementById('libSearch');
+      var openBtn = document.getElementById('openLib');
+      var closeBtn = document.getElementById('libClose');
+
+      var nf = new Intl.NumberFormat('en-US');
+      function fmtHours(h) {
+        if (!h) return '—';
+        return (h >= 10 ? nf.format(Math.round(h)) : String(h)) + 'h';
+      }
+      function cap(id) {
+        return 'https://cdn.cloudflare.steamstatic.com/steam/apps/' + id + '/capsule_231x87.jpg';
+      }
+
+      // fill counts
+      document.querySelectorAll('[data-count]').forEach(function (el) {
+        el.textContent = nf.format(meta.count) + ' games';
+      });
+      var fc = document.querySelector('[data-footcount]'); if (fc) fc.textContent = nf.format(meta.count);
+      var fh = document.querySelector('[data-foothours]'); if (fh) fh.textContent = nf.format(meta.totalHours);
+
+      // build rows
+      var frag = document.createDocumentFragment();
+      games.forEach(function (g, i) {
+        var li = document.createElement('li');
+        li.className = 'lib-item';
+        li.dataset.n = g.name.toLowerCase();
+
+        var row = document.createElement('button');
+        row.type = 'button';
+        row.className = 'lib-row';
+        row.setAttribute('aria-expanded', 'false');
+        row.innerHTML =
+          '<img class="thumb" loading="lazy" alt="" src="' + cap(g.id) + '" onerror="this.style.visibility=\'hidden\'">' +
+          '<span class="rn">' + esc(g.name) + '</span>' +
+          '<span class="rh">' + fmtHours(g.hours) + '</span>';
+
+        var info = document.createElement('div');
+        info.className = 'lib-info';
+        info.hidden = true;
+        var parts = [];
+        parts.push(fact('Playtime', g.hours ? fmtHours(g.hours) + ' played' : 'Never played'));
+        if (g.rel) parts.push(fact('Released', g.rel.slice(0, 4)));
+        if (g.meta != null) parts.push(fact('Metascore', String(g.meta)));
+        if (g.user != null) parts.push(fact('Users', g.user + '%'));
+        info.innerHTML = parts.join('') +
+          '<a class="lib-link" href="https://store.steampowered.com/app/' + g.id + '/" target="_blank" rel="noopener">Open in Steam →</a>';
+
+        row.addEventListener('click', function () {
+          var open = row.getAttribute('aria-expanded') === 'true';
+          row.setAttribute('aria-expanded', open ? 'false' : 'true');
+          info.hidden = open;
+        });
+
+        li.appendChild(row);
+        li.appendChild(info);
+        frag.appendChild(li);
+      });
+      listEl.appendChild(frag);
+
+      function esc(s) {
+        return s.replace(/[&<>"]/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+        });
+      }
+      function fact(k, v) {
+        return '<span class="f"><span class="k">' + k + '</span>' + esc(v) + '</span>';
+      }
+
+      // search filter
+      searchEl.addEventListener('input', function () {
+        var q = searchEl.value.trim().toLowerCase();
+        var shown = 0;
+        for (var i = 0; i < listEl.children.length; i++) {
+          var li = listEl.children[i];
+          var match = !q || li.dataset.n.indexOf(q) !== -1;
+          li.hidden = !match;
+          if (match) shown++;
+        }
+        emptyEl.hidden = shown !== 0;
+      });
+
+      function open() {
+        if (typeof dlg.showModal === 'function') dlg.showModal();
+        else dlg.setAttribute('open', '');
+        searchEl.focus();
+      }
+      function close() { dlg.close(); }
+
+      openBtn.addEventListener('click', open);
+      closeBtn.addEventListener('click', close);
+      // click on backdrop closes
+      dlg.addEventListener('click', function (e) {
+        if (e.target === dlg) close();
+      });
+    })();
+  </script>
 </body>
 </html>
