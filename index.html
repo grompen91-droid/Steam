@@ -403,12 +403,50 @@
       dialog.lib { width: 94vw; max-height: 86svh; margin: 3vh auto 0; }
     }
 
-    /* Interests */
-    .grid3 {
+    /* Interests band: anime cards | song cards | manga */
+    .band {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr) minmax(0, 0.72fr);
       gap: clamp(1.25rem, 3vw, 2.25rem);
       margin-top: clamp(1.5rem, 3.5vh, 2.25rem);
+    }
+    .band h2 { margin-bottom: 0.85rem; }
+
+    /* square (album) cover variant */
+    .cover.sq { aspect-ratio: 1 / 1; }
+
+    /* fetched-artwork cards */
+    .cover.art { position: relative; }
+    .cover.art .art-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .cover.art .art-img.loaded { opacity: 0.94; }
+    .cover.art:hover .art-img.loaded,
+    .cover.art:focus-visible .art-img.loaded { opacity: 1; }
+    .art-fallback {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2rem;
+      text-align: center;
+      padding: 0.6rem;
+      font-size: 0.78rem;
+      line-height: 1.25;
+      color: var(--dim);
+    }
+    .art-fallback .fa {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      color: var(--muted);
     }
 
     ul {
@@ -441,10 +479,12 @@
     }
 
     /* Mobile — Steam-app style grid, page scrolls */
+    @media (max-width: 760px) {
+      .band { grid-template-columns: 1fr; gap: 1.75rem; }
+    }
     @media (max-width: 520px) {
       body { place-items: start center; }
       .cards { grid-template-columns: repeat(3, 1fr); }
-      .grid3 { grid-template-columns: 1fr; gap: 1.75rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -532,24 +572,61 @@
       </div>
     </section>
 
-    <div class="grid3">
+    <div class="band">
       <section>
-        <h2>Music</h2>
-        <ul>
-          <li>Frank Sinatra</li>
-          <li>Wave to Earth</li>
-          <li>Lil Peep</li>
-          <li>Joji</li>
-        </ul>
+        <h2>Favorite anime</h2>
+        <div class="cards">
+          <figure class="game">
+            <figcaption><span class="t">Mushoku Tensei</span><span class="h">TV · 2021</span></figcaption>
+            <a class="cover art" data-anime="Mushoku Tensei Jobless Reincarnation" href="https://myanimelist.net/anime.php?cat=anime&q=Mushoku%20Tensei" target="_blank" rel="noopener">
+              <img class="art-img" alt="" />
+              <span class="art-fallback">Mushoku Tensei</span>
+            </a>
+          </figure>
+          <figure class="game">
+            <figcaption><span class="t">Code Geass</span><span class="h">TV · 2006</span></figcaption>
+            <a class="cover art" data-anime="Code Geass Lelouch of the Rebellion" href="https://myanimelist.net/anime.php?cat=anime&q=Code%20Geass" target="_blank" rel="noopener">
+              <img class="art-img" alt="" />
+              <span class="art-fallback">Code Geass</span>
+            </a>
+          </figure>
+          <figure class="game">
+            <figcaption><span class="t">Welcome to the N.H.K.</span><span class="h">TV · 2006</span></figcaption>
+            <a class="cover art" data-anime="Welcome to the NHK" href="https://myanimelist.net/anime.php?cat=anime&q=Welcome%20to%20the%20NHK" target="_blank" rel="noopener">
+              <img class="art-img" alt="" />
+              <span class="art-fallback">Welcome to the N.H.K.</span>
+            </a>
+          </figure>
+        </div>
       </section>
+
       <section>
-        <h2>Anime</h2>
-        <ul>
-          <li>Mushoku Tensei</li>
-          <li>Welcome to the N.H.K.</li>
-          <li>Code Geass</li>
-        </ul>
+        <h2>Favorite songs</h2>
+        <div class="cards">
+          <figure class="game">
+            <figcaption><span class="t">White Tee</span><span class="h">Lil Peep</span></figcaption>
+            <a class="cover art sq" data-song="Lil Peep White Tee" href="https://www.youtube.com/results?search_query=Lil%20Peep%20White%20Tee" target="_blank" rel="noopener">
+              <img class="art-img" alt="" />
+              <span class="art-fallback">White Tee<span class="fa">Lil Peep</span></span>
+            </a>
+          </figure>
+          <figure class="game">
+            <figcaption><span class="t">1AM Freestyle</span><span class="h">Joji</span></figcaption>
+            <a class="cover art sq" data-song="Joji 1AM Freestyle" href="https://www.youtube.com/results?search_query=Joji%201AM%20Freestyle" target="_blank" rel="noopener">
+              <img class="art-img" alt="" />
+              <span class="art-fallback">1AM Freestyle<span class="fa">Joji</span></span>
+            </a>
+          </figure>
+          <figure class="game">
+            <figcaption><span class="t">love.</span><span class="h">wave to earth</span></figcaption>
+            <a class="cover art sq" data-song="wave to earth love" href="https://www.youtube.com/results?search_query=wave%20to%20earth%20love" target="_blank" rel="noopener">
+              <img class="art-img" alt="" />
+              <span class="art-fallback">love.<span class="fa">wave to earth</span></span>
+            </a>
+          </figure>
+        </div>
       </section>
+
       <section>
         <h2>Manga</h2>
         <ul>
@@ -704,6 +781,71 @@
       // click on backdrop closes
       dlg.addEventListener('click', function (e) {
         if (e.target === dlg) close();
+      });
+    })();
+  </script>
+
+  <script>
+    // Load anime posters (Jikan) and song album art (iTunes) client-side, cached in localStorage.
+    (function () {
+      function cacheGet(k) { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } }
+      function cacheSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+      function apply(el, url) {
+        if (!url) return;
+        var img = el.querySelector('.art-img');
+        if (!img) return;
+        img.onload = function () { img.classList.add('loaded'); };
+        img.onerror = function () { img.removeAttribute('src'); };
+        img.src = url;
+      }
+
+      function jsonp(url, cb) {
+        var name = '__jp' + Math.random().toString(36).slice(2);
+        var s = document.createElement('script');
+        var done = false;
+        window[name] = function (data) { done = true; cleanup(); cb(data); };
+        function cleanup() { try { delete window[name]; } catch (e) { window[name] = undefined; } if (s.parentNode) s.parentNode.removeChild(s); }
+        s.onerror = function () { if (!done) { cleanup(); cb(null); } };
+        s.src = url + (url.indexOf('?') === -1 ? '?' : '&') + 'callback=' + name;
+        document.head.appendChild(s);
+        setTimeout(function () { if (!done) { cleanup(); cb(null); } }, 8000);
+      }
+
+      // Anime — Jikan v4 (CORS-enabled)
+      [].slice.call(document.querySelectorAll('[data-anime]')).forEach(function (el, i) {
+        var q = el.getAttribute('data-anime');
+        var key = 'art:anime:' + q;
+        var cached = cacheGet(key);
+        if (cached) { apply(el, cached); return; }
+        setTimeout(function () {
+          fetch('https://api.jikan.moe/v4/anime?limit=1&sfw&q=' + encodeURIComponent(q))
+            .then(function (r) { return r.json(); })
+            .then(function (d) {
+              var a = d && d.data && d.data[0];
+              if (!a) return;
+              var im = a.images && a.images.jpg && (a.images.jpg.large_image_url || a.images.jpg.image_url);
+              if (im) { apply(el, im); cacheSet(key, im); }
+              if (a.url) el.setAttribute('href', a.url);
+            })
+            .catch(function () {});
+        }, i * 450); // stagger for Jikan rate limit
+      });
+
+      // Songs — iTunes Search (JSONP to sidestep CORS)
+      [].slice.call(document.querySelectorAll('[data-song]')).forEach(function (el, i) {
+        var q = el.getAttribute('data-song');
+        var key = 'art:song:' + q;
+        var cached = cacheGet(key);
+        if (cached) { apply(el, cached); return; }
+        setTimeout(function () {
+          jsonp('https://itunes.apple.com/search?entity=song&limit=1&term=' + encodeURIComponent(q), function (d) {
+            var s = d && d.results && d.results[0];
+            if (!s) return;
+            var art = s.artworkUrl100;
+            if (art) { art = art.replace('100x100bb', '600x600bb'); apply(el, art); cacheSet(key, art); }
+          });
+        }, i * 300);
       });
     })();
   </script>
