@@ -23,10 +23,7 @@
 
     body {
       margin: 0;
-      background:
-        radial-gradient(140% 100% at 50% -10%, #151517 0%, rgba(21, 21, 23, 0) 42%),
-        var(--bg);
-      background-attachment: fixed;
+      background: var(--bg);
       color: var(--fg);
       font-family: var(--sans);
       -webkit-font-smoothing: antialiased;
@@ -204,15 +201,10 @@
       flex-direction: column;
     }
     dialog.lib:not([open]) { display: none; }
-    dialog.lib[open] { animation: dlgIn 0.24s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
     dialog.lib::backdrop {
       background: rgba(6, 6, 7, 0.66);
       -webkit-backdrop-filter: blur(5px);
       backdrop-filter: blur(5px);
-    }
-    @keyframes dlgIn {
-      from { opacity: 0; transform: translateY(10px) scale(0.985); }
-      to { opacity: 1; transform: none; }
     }
 
     .lib-list {
@@ -454,23 +446,6 @@
       body { place-items: start center; }
       .cards { grid-template-columns: repeat(3, 1fr); }
       .grid3 { grid-template-columns: 1fr; gap: 1.75rem; }
-    }
-
-    /* Premium entrance */
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: none; }
-    }
-    @media (prefers-reduced-motion: no-preference) {
-      .card > header,
-      .card > .played,
-      .card > .grid3,
-      .card > footer {
-        animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-      }
-      .card > .played { animation-delay: 0.07s; }
-      .card > .grid3 { animation-delay: 0.14s; }
-      .card > footer { animation-delay: 0.2s; }
     }
 
     @media (prefers-reduced-motion: reduce) {
