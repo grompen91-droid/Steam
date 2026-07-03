@@ -126,6 +126,13 @@
       font-size: 0.82rem;
       font-variant-numeric: tabular-nums;
     }
+    ul.ranked a {
+      color: var(--dim);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    ul.ranked a:hover,
+    ul.ranked a:focus-visible { color: var(--fg); }
     ul.ranked li:hover .hrs { color: var(--dim); }
 
     footer {
@@ -167,14 +174,14 @@
       <section>
         <h2>Most played</h2>
         <ul class="ranked">
-          <li><span>Garry's Mod</span><span class="hrs">2,316h</span></li>
-          <li><span>Counter-Strike 2</span><span class="hrs">1,315h</span></li>
-          <li><span>Binding of Isaac: Rebirth</span><span class="hrs">201h</span></li>
-          <li><span>Terraria</span><span class="hrs">185h</span></li>
-          <li><span>Cyberpunk 2077</span><span class="hrs">134h</span></li>
-          <li><span>Deadlock</span><span class="hrs">111h</span></li>
-          <li><span>THE FINALS</span><span class="hrs">85h</span></li>
-          <li><span>Team Fortress 2</span><span class="hrs">75h</span></li>
+          <li><a href="https://store.steampowered.com/app/4000/" target="_blank" rel="noopener">Garry's Mod</a><span class="hrs">2,316h</span></li>
+          <li><a href="https://store.steampowered.com/app/730/" target="_blank" rel="noopener">Counter-Strike 2</a><span class="hrs">1,315h</span></li>
+          <li><a href="https://store.steampowered.com/app/250900/" target="_blank" rel="noopener">Binding of Isaac: Rebirth</a><span class="hrs">201h</span></li>
+          <li><a href="https://store.steampowered.com/app/105600/" target="_blank" rel="noopener">Terraria</a><span class="hrs">185h</span></li>
+          <li><a href="https://store.steampowered.com/app/1091500/" target="_blank" rel="noopener">Cyberpunk 2077</a><span class="hrs">134h</span></li>
+          <li><a href="https://store.steampowered.com/app/1422450/" target="_blank" rel="noopener">Deadlock</a><span class="hrs">111h</span></li>
+          <li><a href="https://store.steampowered.com/app/2073850/" target="_blank" rel="noopener">THE FINALS</a><span class="hrs">85h</span></li>
+          <li><a href="https://store.steampowered.com/app/440/" target="_blank" rel="noopener">Team Fortress 2</a><span class="hrs">75h</span></li>
         </ul>
       </section>
 
