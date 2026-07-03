@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gvsh</title>
+  <meta name="description" content="gvsh — games, anime, manga and music." />
+  <style>
+    :root {
+      --bg: #0c0c0d;
+      --fg: #ececed;
+      --dim: #9a9ca0;
+      --muted: #6d6f73;
+      --line: rgba(255, 255, 255, 0.08);
+      --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      display: grid;
+      place-items: center;
+      min-height: 100svh;
+      padding: clamp(1.25rem, 4vw, 3rem);
+    }
+
+    .card {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    /* Header */
+    header { margin-bottom: clamp(1.75rem, 4vh, 2.75rem); }
+
+    .name {
+      font-size: clamp(2.4rem, 7vw, 3.6rem);
+      font-weight: 650;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin: 0;
+    }
+
+    .tagline {
+      margin: 0.85rem 0 0;
+      max-width: 46ch;
+      color: var(--dim);
+      font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+      line-height: 1.55;
+    }
+
+    .links {
+      margin-top: 1.1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .links a:hover,
+    .links a:focus-visible { color: var(--fg); }
+
+    /* Sections grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.25rem);
+      border-top: 1px solid var(--line);
+      padding-top: clamp(1.75rem, 4vh, 2.5rem);
+    }
+
+    section h2 {
+      margin: 0 0 0.9rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    li {
+      font-size: clamp(0.98rem, 2.1vw, 1.08rem);
+      line-height: 1.3;
+      color: var(--dim);
+      transition: color 0.15s ease;
+    }
+    li:hover { color: var(--fg); }
+
+    footer {
+      margin-top: clamp(1.75rem, 4vh, 2.5rem);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    /* Tablet */
+    @media (max-width: 720px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Mobile */
+    @media (max-width: 440px) {
+      body { place-items: start center; }
+      .grid { grid-template-columns: 1fr; gap: 1.75rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <header>
+      <h1 class="name">gvsh</h1>
+      <p class="tagline">Somewhere between a CS2 lobby and a late-night anime binge. Here's what I'm into.</p>
+      <nav class="links">
+        <a href="https://steamcommunity.com/id/gvsh/" target="_blank" rel="noopener">Steam</a>
+        <a href="https://myanimelist.net/profile/Bacondise" target="_blank" rel="noopener">MyAnimeList</a>
+      </nav>
+    </header>
+
+    <div class="grid">
+      <section>
+        <h2>Music</h2>
+        <ul>
+          <li>Frank Sinatra</li>
+          <li>Wave to Earth</li>
+          <li>Lil Peep</li>
+          <li>Joji</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Games</h2>
+        <ul>
+          <li>Counter-Strike 2</li>
+          <li>Garry's Mod</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Anime</h2>
+        <ul>
+          <li>Mushoku Tensei</li>
+          <li>Welcome to the N.H.K.</li>
+          <li>Code Geass</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Manga</h2>
+        <ul>
+          <li>Oyasumi Punpun</li>
+          <li>Tokyo Ghoul</li>
+        </ul>
+      </section>
+    </div>
+
+    <footer>© 2026 gvsh</footer>
+  </main>
+</body>
+</html>
