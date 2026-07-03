@@ -11,13 +11,14 @@
       --fg: #ececed;
       --dim: #9a9ca0;
       --muted: #6d6f73;
+      --tile: #161619;
       --line: rgba(255, 255, 255, 0.08);
       --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+      --radius: 8px;
     }
 
     * { box-sizing: border-box; }
-
     html, body { height: 100%; }
 
     body {
@@ -30,16 +31,13 @@
       display: grid;
       place-items: center;
       min-height: 100svh;
-      padding: clamp(1.25rem, 4vw, 3rem);
+      padding: clamp(1.25rem, 3.5vw, 2.75rem);
     }
 
-    .card {
-      width: 100%;
-      max-width: 900px;
-    }
+    .card { width: 100%; max-width: 1040px; }
 
     /* Header */
-    header { margin-bottom: clamp(1.75rem, 4vh, 2.75rem); }
+    header { margin-bottom: clamp(1.5rem, 3.5vh, 2.5rem); }
 
     .name {
       font-size: clamp(2.4rem, 7vw, 3.6rem);
@@ -58,7 +56,7 @@
     }
 
     .links {
-      margin-top: 1.1rem;
+      margin-top: 1.05rem;
       display: flex;
       flex-wrap: wrap;
       gap: 1.25rem;
@@ -67,7 +65,6 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
     }
-
     .links a {
       color: var(--muted);
       text-decoration: none;
@@ -76,23 +73,91 @@
     .links a:hover,
     .links a:focus-visible { color: var(--fg); }
 
-    /* Sections grid */
-    .grid {
-      display: grid;
-      grid-template-columns: 1.55fr 1fr 1fr 1fr;
-      gap: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.25rem);
-      border-top: 1px solid var(--line);
-      padding-top: clamp(1.75rem, 4vh, 2.5rem);
-    }
-
-    section h2 {
-      margin: 0 0 0.9rem;
+    /* Section labels */
+    h2 {
+      margin: 0 0 1rem;
       font-family: var(--mono);
       font-size: 0.72rem;
       font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
+    }
+
+    .played {
+      border-top: 1px solid var(--line);
+      padding-top: clamp(1.5rem, 3.5vh, 2.25rem);
+    }
+
+    /* Game cover cards — single fitted row on desktop */
+    .cards {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(8px, 1vw, 14px);
+    }
+
+    .game {
+      flex: 1 1 0;
+      min-width: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .game figcaption {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      min-width: 0;
+    }
+
+    .game .t {
+      display: block;
+      min-width: 0;
+      font-size: clamp(0.7rem, 0.95vw, 0.82rem);
+      line-height: 1.25;
+      color: var(--fg);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .game .h {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cover {
+      display: block;
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--tile);
+    }
+    .cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+      opacity: 0.94;
+    }
+    .cover:hover img,
+    .cover:focus-visible img {
+      opacity: 1;
+      transform: scale(1.035);
+    }
+
+    /* Interests */
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(1.25rem, 3vw, 2.25rem);
+      margin-top: clamp(1.5rem, 3.5vh, 2.25rem);
     }
 
     ul {
@@ -103,59 +168,37 @@
       flex-direction: column;
       gap: 0.5rem;
     }
-
     li {
-      font-size: clamp(0.98rem, 2.1vw, 1.08rem);
+      font-size: clamp(0.98rem, 2.1vw, 1.06rem);
       line-height: 1.3;
       color: var(--dim);
       transition: color 0.15s ease;
     }
     li:hover { color: var(--fg); }
 
-    /* Ranked list with hours */
-    ul.ranked li {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-    ul.ranked .hrs {
-      flex: none;
-      color: var(--muted);
-      font-family: var(--mono);
-      font-size: 0.82rem;
-      font-variant-numeric: tabular-nums;
-    }
-    ul.ranked a {
-      color: var(--dim);
-      text-decoration: none;
-      transition: color 0.15s ease;
-    }
-    ul.ranked a:hover,
-    ul.ranked a:focus-visible { color: var(--fg); }
-    ul.ranked li:hover .hrs { color: var(--dim); }
-
     footer {
-      margin-top: clamp(1.75rem, 4vh, 2.5rem);
+      margin-top: clamp(1.5rem, 3.5vh, 2.25rem);
       font-family: var(--mono);
       font-size: 0.7rem;
       letter-spacing: 0.08em;
       color: var(--muted);
     }
 
-    /* Tablet */
-    @media (max-width: 720px) {
-      .grid { grid-template-columns: repeat(2, 1fr); }
+    /* Tablet — cards wrap into a grid */
+    @media (max-width: 760px) {
+      .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
     }
 
-    /* Mobile */
-    @media (max-width: 440px) {
+    /* Mobile — Steam-app style grid, page scrolls */
+    @media (max-width: 520px) {
       body { place-items: start center; }
-      .grid { grid-template-columns: 1fr; gap: 1.75rem; }
+      .cards { grid-template-columns: repeat(3, 1fr); }
+      .grid3 { grid-template-columns: 1fr; gap: 1.75rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; }
+      .cover:hover img { transform: none; }
     }
   </style>
 </head>
@@ -170,21 +213,61 @@
       </nav>
     </header>
 
-    <div class="grid">
-      <section>
-        <h2>Most played</h2>
-        <ul class="ranked">
-          <li><a href="https://store.steampowered.com/app/4000/" target="_blank" rel="noopener">Garry's Mod</a><span class="hrs">2,316h</span></li>
-          <li><a href="https://store.steampowered.com/app/730/" target="_blank" rel="noopener">Counter-Strike 2</a><span class="hrs">1,315h</span></li>
-          <li><a href="https://store.steampowered.com/app/250900/" target="_blank" rel="noopener">Binding of Isaac: Rebirth</a><span class="hrs">201h</span></li>
-          <li><a href="https://store.steampowered.com/app/105600/" target="_blank" rel="noopener">Terraria</a><span class="hrs">185h</span></li>
-          <li><a href="https://store.steampowered.com/app/1091500/" target="_blank" rel="noopener">Cyberpunk 2077</a><span class="hrs">134h</span></li>
-          <li><a href="https://store.steampowered.com/app/1422450/" target="_blank" rel="noopener">Deadlock</a><span class="hrs">111h</span></li>
-          <li><a href="https://store.steampowered.com/app/2073850/" target="_blank" rel="noopener">THE FINALS</a><span class="hrs">85h</span></li>
-          <li><a href="https://store.steampowered.com/app/440/" target="_blank" rel="noopener">Team Fortress 2</a><span class="hrs">75h</span></li>
-        </ul>
-      </section>
+    <section class="played">
+      <h2>Most played</h2>
+      <div class="cards">
+        <figure class="game">
+          <figcaption><span class="t">Garry's Mod</span><span class="h">2,316h</span></figcaption>
+          <a class="cover" href="https://store.steampowered.com/app/4000/" target="_blank" rel="noopener">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/4000/library_600x900.jpg" alt="Garry's Mod cover art" width="600" height="900" loading="lazy" />
+          </a>
+        </figure>
+        <figure class="game">
+          <figcaption><span class="t">Counter-Strike 2</span><span class="h">1,315h</span></figcaption>
+          <a class="cover" href="https://store.steampowered.com/app/730/" target="_blank" rel="noopener">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/730/library_600x900.jpg" alt="Counter-Strike 2 cover art" width="600" height="900" loading="lazy" />
+          </a>
+        </figure>
+        <figure class="game">
+          <figcaption><span class="t">Binding of Isaac: Rebirth</span><span class="h">201h</span></figcaption>
+          <a class="cover" href="https://store.steampowered.com/app/250900/" target="_blank" rel="noopener">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/250900/library_600x900.jpg" alt="The Binding of Isaac: Rebirth cover art" width="600" height="900" loading="lazy" />
+          </a>
+        </figure>
+        <figure class="game">
+          <figcaption><span class="t">Terraria</span><span class="h">185h</span></figcaption>
+          <a class="cover" href="https://store.steampowered.com/app/105600/" target="_blank" rel="noopener">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/105600/library_600x900.jpg" alt="Terraria cover art" width="600" height="900" loading="lazy" />
+          </a>
+        </figure>
+        <figure class="game">
+          <figcaption><span class="t">Cyberpunk 2077</span><span class="h">134h</span></figcaption>
+          <a class="cover" href="https://store.steampowered.com/app/1091500/" target="_blank" rel="noopener">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/library_600x900.jpg" alt="Cyberpunk 2077 cover art" width="600" height="900" loading="lazy" />
+          </a>
+        </figure>
+        <figure class="game">
+          <figcaption><span class="t">Deadlock</span><span class="h">111h</span></figcaption>
+          <a class="cover" href="https://store.steampowered.com/app/1422450/" target="_blank" rel="noopener">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1422450/library_600x900.jpg" alt="Deadlock cover art" width="600" height="900" loading="lazy" />
+          </a>
+        </figure>
+        <figure class="game">
+          <figcaption><span class="t">THE FINALS</span><span class="h">85h</span></figcaption>
+          <a class="cover" href="https://store.steampowered.com/app/2073850/" target="_blank" rel="noopener">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2073850/library_600x900.jpg" alt="THE FINALS cover art" width="600" height="900" loading="lazy" />
+          </a>
+        </figure>
+        <figure class="game">
+          <figcaption><span class="t">Team Fortress 2</span><span class="h">75h</span></figcaption>
+          <a class="cover" href="https://store.steampowered.com/app/440/" target="_blank" rel="noopener">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/440/library_600x900.jpg" alt="Team Fortress 2 cover art" width="600" height="900" loading="lazy" />
+          </a>
+        </figure>
+      </div>
+    </section>
 
+    <div class="grid3">
       <section>
         <h2>Music</h2>
         <ul>
@@ -194,7 +277,6 @@
           <li>Joji</li>
         </ul>
       </section>
-
       <section>
         <h2>Anime</h2>
         <ul>
@@ -203,7 +285,6 @@
           <li>Code Geass</li>
         </ul>
       </section>
-
       <section>
         <h2>Manga</h2>
         <ul>
