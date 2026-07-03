@@ -110,6 +110,7 @@
       flex-direction: column;
       gap: 1px;
       min-width: 0;
+      text-align: center;
     }
 
     .game .t {
@@ -406,7 +407,7 @@
     /* Interests band: anime cards | song cards | manga */
     .band {
       display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr) minmax(0, 0.72fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: clamp(1.25rem, 3vw, 2.25rem);
       margin-top: clamp(1.5rem, 3.5vh, 2.25rem);
     }
@@ -628,11 +629,30 @@
       </section>
 
       <section>
-        <h2>Manga</h2>
-        <ul>
-          <li>Oyasumi Punpun</li>
-          <li>Tokyo Ghoul</li>
-        </ul>
+        <h2>Favorite manga</h2>
+        <div class="cards">
+          <figure class="game">
+            <figcaption><span class="t">Oyasumi Punpun</span><span class="h">Inio Asano</span></figcaption>
+            <a class="cover art" data-manga="Oyasumi Punpun" href="https://myanimelist.net/manga.php?q=Oyasumi%20Punpun" target="_blank" rel="noopener">
+              <img class="art-img" alt="" />
+              <span class="art-fallback">Oyasumi Punpun</span>
+            </a>
+          </figure>
+          <figure class="game">
+            <figcaption><span class="t">Tokyo Ghoul</span><span class="h">Sui Ishida</span></figcaption>
+            <a class="cover art" data-manga="Tokyo Ghoul" href="https://myanimelist.net/manga.php?q=Tokyo%20Ghoul" target="_blank" rel="noopener">
+              <img class="art-img" alt="" />
+              <span class="art-fallback">Tokyo Ghoul</span>
+            </a>
+          </figure>
+          <figure class="game">
+            <figcaption><span class="t">The Beginning After the End</span><span class="h">TurtleMe</span></figcaption>
+            <a class="cover art" data-manga="The Beginning After the End" href="https://myanimelist.net/manga.php?q=The%20Beginning%20After%20the%20End" target="_blank" rel="noopener">
+              <img class="art-img" alt="" />
+              <span class="art-fallback">The Beginning After the End</span>
+            </a>
+          </figure>
+        </div>
       </section>
     </div>
 
@@ -795,7 +815,11 @@
         if (!url) return;
         var img = el.querySelector('.art-img');
         if (!img) return;
-        img.onload = function () { img.classList.add('loaded'); };
+        img.onload = function () {
+          img.classList.add('loaded');
+          var fb = el.querySelector('.art-fallback');
+          if (fb) fb.style.display = 'none';
+        };
         img.onerror = function () { img.removeAttribute('src'); };
         img.src = url;
       }
@@ -830,6 +854,26 @@
             })
             .catch(function () {});
         }, i * 450); // stagger for Jikan rate limit
+      });
+
+      // Manga — Jikan v4 (CORS-enabled)
+      [].slice.call(document.querySelectorAll('[data-manga]')).forEach(function (el, i) {
+        var q = el.getAttribute('data-manga');
+        var key = 'art:manga:' + q;
+        var cached = cacheGet(key);
+        if (cached) { apply(el, cached); return; }
+        setTimeout(function () {
+          fetch('https://api.jikan.moe/v4/manga?limit=1&q=' + encodeURIComponent(q))
+            .then(function (r) { return r.json(); })
+            .then(function (d) {
+              var a = d && d.data && d.data[0];
+              if (!a) return;
+              var im = a.images && a.images.jpg && (a.images.jpg.large_image_url || a.images.jpg.image_url);
+              if (im) { apply(el, im); cacheSet(key, im); }
+              if (a.url) el.setAttribute('href', a.url);
+            })
+            .catch(function () {});
+        }, 1400 + i * 450); // stagger after anime calls for Jikan rate limit
       });
 
       // Songs — iTunes Search (JSONP to sidestep CORS)
