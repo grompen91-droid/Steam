@@ -79,7 +79,7 @@
     /* Sections grid */
     .grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: 1.55fr 1fr 1fr 1fr;
       gap: clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.25rem);
       border-top: 1px solid var(--line);
       padding-top: clamp(1.75rem, 4vh, 2.5rem);
@@ -111,6 +111,22 @@
       transition: color 0.15s ease;
     }
     li:hover { color: var(--fg); }
+
+    /* Ranked list with hours */
+    ul.ranked li {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    ul.ranked .hrs {
+      flex: none;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-variant-numeric: tabular-nums;
+    }
+    ul.ranked li:hover .hrs { color: var(--dim); }
 
     footer {
       margin-top: clamp(1.75rem, 4vh, 2.5rem);
@@ -149,20 +165,26 @@
 
     <div class="grid">
       <section>
+        <h2>Most played</h2>
+        <ul class="ranked">
+          <li><span>Garry's Mod</span><span class="hrs">2,316h</span></li>
+          <li><span>Counter-Strike 2</span><span class="hrs">1,315h</span></li>
+          <li><span>Binding of Isaac: Rebirth</span><span class="hrs">201h</span></li>
+          <li><span>Terraria</span><span class="hrs">185h</span></li>
+          <li><span>Cyberpunk 2077</span><span class="hrs">134h</span></li>
+          <li><span>Deadlock</span><span class="hrs">111h</span></li>
+          <li><span>THE FINALS</span><span class="hrs">85h</span></li>
+          <li><span>Team Fortress 2</span><span class="hrs">75h</span></li>
+        </ul>
+      </section>
+
+      <section>
         <h2>Music</h2>
         <ul>
           <li>Frank Sinatra</li>
           <li>Wave to Earth</li>
           <li>Lil Peep</li>
           <li>Joji</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>Games</h2>
-        <ul>
-          <li>Counter-Strike 2</li>
-          <li>Garry's Mod</li>
         </ul>
       </section>
 
@@ -184,7 +206,7 @@
       </section>
     </div>
 
-    <footer>© 2026 gvsh</footer>
+    <footer>© 2026 gvsh · 449 games in the library</footer>
   </main>
 </body>
 </html>
